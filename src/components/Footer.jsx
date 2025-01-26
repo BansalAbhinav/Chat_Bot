@@ -24,7 +24,8 @@ const Footer = ({ chatHistory, setchatHistory, generateActualBotResponse }) => {
       //calling the function to genrat response
       generateActualBotResponse([
         ...chatHistory,
-        { role: "user", text: ` Using the details provided above,please address this query :${userMessage}` },
+        { role: "user",text: `${userMessage}\nIMPORTANT: Answer like a barista - friendly, accurate, and brief. Focus on key details. For pricing, use € symbol. Fetch relevant information from the provided data, and never invent anything.`
+      },
       ]);
     }, 600);
   };
