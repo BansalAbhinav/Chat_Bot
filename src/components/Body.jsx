@@ -29,12 +29,20 @@ const Body = () =>
 try{
   
   const response  = await fetch(import.meta.env.VITE_API_URL,requestHistory);
-  const data = await response.json();
-  if(!response.ok) throw new Error(data.error.messsage || "Something Went Wrong !") 
-const apiResponseText =data.candidates[0].content.parts[0].text.replace(/\*\*(.*?)\*\*/g,"$1") ;
+  if (!response.ok) {
+    const errorText = await response.text(); 
+    throw new Error(`API call failed: ${errorText}`); 
+  }
 
-  console.log(apiResponseText);
-  updateHistory(apiResponseText)
+  const data = await response.json();
+
+  if (!data.candidates || !data.candidates[0].content || !data.candidates[0].content.parts[0].text) {
+    throw new Error("Invalid response structure from API");
+  }
+
+  const apiResponseText = data.candidates[0].content.parts[0].text.replace(/\*\*(.*?)\*\*/g, "$1");
+
+  updateHistory(apiResponseText);
 
   }
 catch(error){
