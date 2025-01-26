@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import ChatBotIcon from "./ChatBotIcon";
-import Footer from "./footer";
+import Footer from "./Footer";
 import ChatMessage from "./ChatMessage";
 import { companyInfo } from "./companyInfo";
 
